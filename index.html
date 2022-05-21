@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+    body{
+      font-family: 'Manrope', sans-serif;
+      background-color: hsl(218, 23%, 16%);
+    }
+    .advice-flexbox{
+      display: flex;
+      box-sizing: border-box;
+      width: 100%;
+      height: 95vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .advice-item{
+      display: block;
+      background-color: hsl(217, 19%, 24%);
+      text-align: center;
+      width: 500px;
+      position: relative;
+      padding-bottom: 80px;
+      border-radius: 15px;
+    }
+    .fixsize{
+      display: flex;
+      justify-content: center;
+      height: 120px;
+    }
+    .advice-header{
+      padding-top: 20px;
+      color: hsl(150, 100%, 66%);
+    }
+    .advice-detail{
+      color: hsl(193, 38%, 86%);
+      font-size: 28px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+    img.line{
+      margin-top: 50px;
+    }
+    button{
+      position: absolute;
+      left: 43%;
+      top: 91%;
+      border-radius: 50%;
+      padding: 20px;
+      background: hsl(150, 100%, 66%);
+      border-color: hsl(150, 100%, 66%);
+    }
+    button:hover{
+      box-shadow: 0px 0px 25px hsl(150, 100%, 66%);
+    }
+
+    .attribution { font-size: 11px; text-align: center; color: white;}
+    .attribution a { color: hsl(150, 100%, 66%); }
+
+    @media screen and (max-width:500px){
+      .advice-item{
+      width: 375px;
+    }
+    img.line{
+      content:url(images/pattern-divider-mobile.svg);
+    }
+    .fixsize{
+      display: flex;
+      justify-content: center;
+      height: 160px;
+    }
+    button{
+      left: 40%;
+      top: 91%;
+    }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="advice-flexbox">
+    <div class="advice-item">
+      <p class="advice-header" id="adviceHeader"></p>
+      <p class="advice-detail fixsize" id="adviceDetail"></p>
+      <img class="line" src="images/pattern-divider-desktop.svg" alt="Line"><br>
+      <button onclick="generateAdvice()"><img src="images/icon-dice.svg" alt="generator icon"></button>
+    </div>
+  </main>
+
+
+  <script>
+    //first appear
+    fetch("https://api.adviceslip.com/advice")
+    .then(response=>response.json())
+    .then(data=>{
+      document.getElementById('adviceHeader').innerHTML=`ADVICE #${data.slip.id}`;
+      document.getElementById('adviceDetail').innerHTML=`“${data.slip.advice}”`;
+      
+    });
+
+    //advice generator function
+    function generateAdvice()
+    {
+    fetch("https://api.adviceslip.com/advice")
+    .then(response=>response.json())
+    .then(data=>{
+      document.getElementById('adviceHeader').innerHTML=`ADVICE #${data.slip.id}`;
+      document.getElementById('adviceDetail').innerHTML=`“${data.slip.advice}”`;
+    });
+
+    }
+    
+  </script>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/ChaiyutK">Chaiyut Kongprawat</a>.
+  </div>
+</body>
+</html>
